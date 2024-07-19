@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Data Analyser - Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            max-width: 100px;
+            margin-right: 20px;
+        }
+        .details {
+            display: flex;
+            flex-direction: column;
+        }
+        .company-name {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .stock-price {
+            font-size: 36px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    {% if stock_info %}
+        <div class="container">
+            {% if stock_info.logo %}
+                <img src="{{ stock_info.logo }}" alt="{{ stock_info.name }}" class="logo" />
+            {% endif %}
+            <div class="details">
+                <div class="company-name">{{ stock_info.name}}</div>
+                <div class="stock-price">{{ stock_info.price }}</div>
+                <div>Change: {{ stock_info.change }}</div>
+                <div>Change Percentage: {{ stock_info.changes_percentage }}</div>
+            </div>
+        </div>
+    {% else %}
+        <p>No data available for the provided stock symbol.</p>
+    {% endif %}
+</body>
+</html>

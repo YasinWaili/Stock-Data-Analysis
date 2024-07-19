@@ -1,18 +1,48 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, render_template
+import requests
 
 app = Flask(__name__)
+
+API_KEY = 'A6gJb21HaC3lNeYdP1LukUSXT9DEcXmp' 
+
+
+# create a dictionairy with all the stock information within it
+def getStock(stock_data):
+    if stock_data and len(stock_data) > 0:
+        stock_info = stock_data[0]
+        symbol = stock_info.get('symbol')
+        stock_logo = f"https://financialmodelingprep.com/image-stock/{symbol}.png"
+        return {
+            'symbol': stock_info.get('symbol'),
+            'price': stock_info.get('price'),
+            'change': stock_info.get('change'),
+            'changes_percentage': stock_info.get('changesPercentage'),
+            'name': stock_info.get('name'),
+            'logo': stock_logo
+        }
+    else:
+        return None
+
 
 @app.route('/')
 def index():
     return render_template("index.html")
 
-@app.route('/result')
+@app.route('/result', methods=['GET'])
 def result():
-    output = request.form.to_dict()
-    name = output["name"]
-    return render_template("index.html")
+    stock_symbol = request.args.get('stock_symbol')
+    if stock_symbol:
+        api_url = f"https://financialmodelingprep.com/api/v3/quote/{stock_symbol}?apikey={API_KEY}"
+        response = requests.get(api_url)
+        if response.status_code == 200:
+            stock_data = response.json()
+        else:
+            stock_data = None
+    else:
+        stock_data = None
+
+    stock_info = getStock(stock_data)
+    return render_template("result.html",stock_info=stock_info)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80)
-
-

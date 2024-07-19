@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>
-        Stock Data Analyser
-    </title>
+    <title>Stock Data Analyser</title>
     <style>
         body {
             display: flex;
@@ -38,11 +36,10 @@
 <body>
     <div class="input-container">
         <h1>Please enter a stock symbol</h1>
-        <input type="text" placeholder="Stock symbol">
-        <input type="Submit" value = "Enter">
+        <form action="/result" method="GET">
+            <input type="text" name="stock_symbol" placeholder="Stock symbol" required>
+            <button type="submit">Enter</button>
+        </form>
     </div>
-
-    
-    <script src=""></script>
 </body>
 </html>
