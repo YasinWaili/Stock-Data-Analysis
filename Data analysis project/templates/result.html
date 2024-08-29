@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Stock Data Analyser - Result</title>
+    <title>{{ stock_info.name }}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
+        .search-bar {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .search-bar input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 18px;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            font-size: 18px;
+        }
         .container {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
         }
         .logo {
             max-width: 100px;
@@ -26,22 +41,71 @@
         .stock-price {
             font-size: 36px;
             font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .change-info {
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .change-info div {
+            margin-right: 20px;
+        }
+        .predict-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: blue;
+            border: none;
+            cursor: pointer;
+        }
+        .graph, .prediction {
+            margin-top: 30px;
+        }
+        .prediction h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .prediction p {
+            font-size: 20px;
         }
     </style>
 </head>
 <body>
+    <form action="/result" method="GET" class="search-bar">
+        <input type="text" name="stock_symbol" placeholder="Stock symbol" required>
+        <button type="submit">Search</button>
+    </form>
     {% if stock_info %}
         <div class="container">
             {% if stock_info.logo %}
-                <img src="{{ stock_info.logo }}" alt="{{ stock_info.name }}" class="logo" />
+                <div>
+                    <img src="{{ stock_info.logo }}" alt="{{ stock_info.name }}" class="logo" />
+                </div>
             {% endif %}
             <div class="details">
-                <div class="company-name">{{ stock_info.name}}</div>
-                <div class="stock-price">{{ stock_info.price }}</div>
-                <div>Change: {{ stock_info.change }}</div>
-                <div>Change Percentage: {{ stock_info.changes_percentage }}</div>
+                <div class="company-name">{{ stock_info.name }}</div>
+                <div class="change-info">
+                    <div class="stock-price">${{ stock_info.price }}</div>
+                    <div style="color: {{ color }};">{{ stock_info.change }}</div>
+                    <div style="color: {{ color }};">({{ stock_info.changes_percentage }}%)</div>
+                    <button class="predict-button">Predict</button>
+                </div>
             </div>
         </div>
+        {% if graph_url %}
+            <div class="graph">
+                <img src="{{ graph_url }}" alt="Historical Stock Prices" />
+            </div>
+        {% endif %}
+        {% if predicted_price is not none %}
+            <div class="prediction">
+                <h2>Statistical Predictions For Tomorrow</h2>
+                <p>Predicted price: ${{ predicted_price }}</p>
+                <p>We can say with 95% confidence that the average price for tomorrow will be anywhere from: 
+                    ${{ lower_bound }} to  ${{ upper_bound }}</p>
+            </div>
+        {% endif %}
     {% else %}
         <p>No data available for the provided stock symbol.</p>
     {% endif %}

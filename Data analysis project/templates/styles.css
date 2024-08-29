@@ -1,0 +1,117 @@
+/* Styles for result.html */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.search-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.search-bar input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.logo {
+    max-width: 100px;
+    margin-right: 20px;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+}
+
+.company-name {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.stock-price {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.change-info {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.change-info div {
+    margin-right: 20px;
+}
+
+.predict-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: blue;
+    border: none;
+    cursor: pointer;
+}
+
+.graph, .prediction {
+    margin-top: 30px;
+}
+
+.prediction h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.prediction p {
+    font-size: 20px;
+}
+
+/* Styles for index.html */
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.input-container {
+    text-align: center;
+}
+
+.input-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.input-container input {
+    padding: 10px;
+    font-size: 16px;
+    width: 200px;
+    box-sizing: border-box;
+}
+
+.input-container button {
+    padding: 10px;
+    font-size: 16px;
+    margin-left: 10px;
+    cursor: pointer;
+}
