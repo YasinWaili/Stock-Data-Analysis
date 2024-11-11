@@ -10,7 +10,7 @@ import os
 
 app = Flask(__name__)
 
-API_KEY = 'A6gJb21HaC3lNeYdP1LukUSXT9DEcXmp'
+API_KEY = 'YOUR OWN API KEY FROM FINANCIAL MODELING PREP'
 
 # Create a directory for saving plots if it doesn't exist
 if not os.path.exists('static'):
